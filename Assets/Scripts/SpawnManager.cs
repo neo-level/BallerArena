@@ -23,10 +23,10 @@ public class SpawnManager : MonoBehaviour
     private void SpawnEnemyOnRandomLocation()
     {
         float spawnPositionX = Random.Range(-_spawnRange, _spawnRange);
-        float spawnPositionY = Random.Range(-_spawnRange, _spawnRange);
+        float spawnPositionZ = Random.Range(-_spawnRange, _spawnRange);
 
         // Create a vector with random generated numbers.
-        Vector3 randomPosition = new Vector3(x: spawnPositionX, y: spawnPositionY, z: 0);
+        Vector3 randomPosition = new Vector3(x: spawnPositionX, y: 0, z: spawnPositionZ);
 
         // Instantiate a new enemy prefab, spawning the enemy at the given location.
         Instantiate(enemyPrefab, position: randomPosition, rotation: enemyPrefab.transform.rotation);
