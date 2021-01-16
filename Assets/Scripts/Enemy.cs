@@ -21,8 +21,16 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        // Move the enemy in the direction of the user by subtracting the player position with the enemies.
+        FollowPlayer();
+    }
+    
+    private void FollowPlayer()
+    {
+        // vector based on the players and enemies position.
         // Addition of normalization to prevent a multitude of force being applied when the distance vector is increased.
-        _enemyRigidbody.AddForce((_player.transform.position - transform.position).normalized * _speed);
+        Vector3 lookDirection = (_player.transform.position - transform.position).normalized;
+       
+        // Move the enemy in the direction of the user by subtracting the player position with the enemies.
+        _enemyRigidbody.AddForce( lookDirection * _speed);
     }
 }
