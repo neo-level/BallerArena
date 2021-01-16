@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour
     // Add a speed variable that can be changed in the component to tweak.
     private float _speed = 10.0f;
     private float _powerUpStrength = 15.0f;
-    
+
     // Get the Rigidbody class.
     private Rigidbody _playerRifRigidbody;
     private GameObject _focalPoint;
+
+    public GameObject powerUpIndicator;
 
     // Set the boolean to validate the power up has been taken.
     public bool hasPowerUp;
@@ -35,6 +37,9 @@ public class PlayerController : MonoBehaviour
 
         // Add force when the player uses his input. with the focal point as reference.
         _playerRifRigidbody.AddForce(_focalPoint.transform.forward * (_speed * forwardInput));
+
+        // Set the indicators position equal to the players.
+        powerUpIndicator.transform.position = transform.position + new Vector3(x: 0, y: -0.5f, z: 0);
     }
 
     // Checks if the player collides with another object, perform action accordingly.
@@ -46,39 +51,41 @@ public class PlayerController : MonoBehaviour
             hasPowerUp = true;
             Destroy(other.gameObject);
 
+            // Set the power up indicator to active.
+            powerUpIndicator.SetActive(true);
             // Starts the thread outside our loop.
             StartCoroutine(PowerUpCountdownRoutine());
-            
-            
         }
     }
-    
+
     // Enable a countdown timer outside update loop.
-   private IEnumerator PowerUpCountdownRoutine()
+    private IEnumerator PowerUpCountdownRoutine()
     {
         // enables our timer outside the update loop in a new thread.
         yield return new WaitForSeconds(7);
+
         hasPowerUp = false;
-        
+        // Disables the power up indicator.
+        powerUpIndicator.SetActive(false);
     }
 
     // Checks for collisions.
     // use this instead of trigger when you work with physics.
     private void OnCollisionEnter(Collision collision)
     {
-    // Checks if the player collides with the enemy and has to power up on it or not.
+        // Checks if the player collides with the enemy and has to power up on it or not.
         if (collision.gameObject.CompareTag("Enemy") && hasPowerUp)
         {
             // fetch the enemies rigidbody.
             Rigidbody enemyRigidbody = collision.gameObject.GetComponent<Rigidbody>();
-            
+
             // Create a vector that holds the direction the enemy has to fly towards on hit.
             Vector3 awayFromPlayer = collision.gameObject.transform.position - transform.position;
-            
+
             // Implement the force on the object, immediately. 
             enemyRigidbody.AddForce(awayFromPlayer * _powerUpStrength, ForceMode.Impulse);
-            
-            
+
+
             Debug.Log($"Player collided with {collision.gameObject} with the power up set to {hasPowerUp}.");
         }
     }
