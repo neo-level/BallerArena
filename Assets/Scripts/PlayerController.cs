@@ -37,12 +37,23 @@ public class PlayerController : MonoBehaviour
     }
 
     // Checks if the player collides with another object, perform action accordingly.
+    // Is useful to understand triggers between colliders
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("PowerUp"))
         {
             hasPowerUp = true;
             Destroy(other.gameObject);
+        }
+    }
+
+    // Checks if the player collides with the enemy and has to power up on it or not.
+    // use this instead of trigger when you work with physics.
+    private void OnCollisionEnter(Collision enemyCollision)
+    {
+        if (enemyCollision.gameObject.CompareTag("Enemy") && hasPowerUp)
+        {
+            Debug.Log($"Player collided with {enemyCollision.gameObject} with the power up set to {hasPowerUp}.");
         }
     }
 }
