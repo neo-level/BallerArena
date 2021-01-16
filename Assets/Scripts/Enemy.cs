@@ -22,6 +22,12 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         FollowPlayer();
+
+        // if the enemy falls of the arena, destroy.
+        if (transform.position.y < -10)
+        {
+            Destroy(gameObject);
+        }
     }
     
     private void FollowPlayer()

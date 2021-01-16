@@ -6,6 +6,8 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
 
+    public int amountOfEnemies;
+
     // Set the range where the enemies can spawn.
     private float _spawnRange = 9.0f;
 
@@ -18,6 +20,12 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        amountOfEnemies = FindObjectsOfType<Enemy>().Length;
+
+        if (amountOfEnemies == 0)
+        {
+            SpawnEnemyWave(1);
+        }
     }
 
     // Spawns a wave of enemies on a random location.
