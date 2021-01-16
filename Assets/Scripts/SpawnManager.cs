@@ -12,8 +12,7 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        // Instantiate a new enemy prefab, spawning the enemy at the given location.
-        Instantiate(enemyPrefab, position: GenerateRandomSpawnPosition(), rotation: enemyPrefab.transform.rotation);
+        SpawnEnemyWave();
     }
 
     // Update is called once per frame
@@ -21,10 +20,15 @@ public class SpawnManager : MonoBehaviour
     {
     }
 
-    // // Spawns an enemy on a random location.
-    // private void SpawnEnemyOnRandomLocation()
-    // {
-    // }
+    // Spawns a wave of enemies on a random location.
+    private void SpawnEnemyWave()
+    {
+        for (int enemies = 0; enemies < 3; enemies++)
+        {
+            // Instantiate a new enemy prefab, spawning the enemy at the given location.
+            Instantiate(enemyPrefab, position: GenerateRandomSpawnPosition(), rotation: enemyPrefab.transform.rotation);
+        }
+    }
 
     private Vector3 GenerateRandomSpawnPosition()
     {
@@ -33,7 +37,7 @@ public class SpawnManager : MonoBehaviour
 
         // Create a vector with random generated numbers.
         Vector3 randomPosition = new Vector3(x: spawnPositionX, y: 0, z: spawnPositionZ);
-        
+
         return randomPosition;
     }
 }
