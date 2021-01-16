@@ -7,14 +7,15 @@ public class SpawnManager : MonoBehaviour
     public GameObject enemyPrefab;
 
     public int amountOfEnemies;
-
+    public int spawnWave = 1;
+    
     // Set the range where the enemies can spawn.
     private float _spawnRange = 9.0f;
 
     // Start is called before the first frame update
     private void Start()
     {
-        SpawnEnemyWave(3);
+        SpawnEnemyWave(spawnWave);
     }
 
     // Update is called once per frame
@@ -24,7 +25,8 @@ public class SpawnManager : MonoBehaviour
 
         if (amountOfEnemies == 0)
         {
-            SpawnEnemyWave(1);
+            spawnWave++;
+            SpawnEnemyWave(spawnWave);
         }
     }
 
