@@ -5,10 +5,12 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public GameObject powerUpPrefab;
+
 
     public int amountOfEnemies;
     public int spawnWave = 1;
-    
+
     // Set the range where the enemies can spawn.
     private float _spawnRange = 9.0f;
 
@@ -16,6 +18,7 @@ public class SpawnManager : MonoBehaviour
     private void Start()
     {
         SpawnEnemyWave(spawnWave);
+        RandomPowerUpSpawn();
     }
 
     // Update is called once per frame
@@ -27,6 +30,7 @@ public class SpawnManager : MonoBehaviour
         {
             spawnWave++;
             SpawnEnemyWave(spawnWave);
+            RandomPowerUpSpawn();
         }
     }
 
@@ -50,5 +54,10 @@ public class SpawnManager : MonoBehaviour
         Vector3 randomPosition = new Vector3(x: spawnPositionX, y: 0, z: spawnPositionZ);
 
         return randomPosition;
+    }
+
+    private void RandomPowerUpSpawn()
+    {
+        Instantiate(powerUpPrefab, GenerateRandomSpawnPosition(), rotation: powerUpPrefab.transform.rotation);
     }
 }
