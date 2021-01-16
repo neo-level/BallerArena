@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Add a speed variable that can be changed in the component to tweak.
-    public float speed = 5.0f;
+    private float _speed = 10.0f;
 
     // Get the Rigidbody class.
     private Rigidbody _playerRifRigidbody;
-    private GameObject focalPoint;
+    private GameObject _focalPoint;
     
     // Start is called before the first frame update
     private void Start()
@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
         _playerRifRigidbody = GetComponent<Rigidbody>();
         
         // get the focal point game object in our scene.
-        focalPoint = GameObject.Find("FocalPoint");
+        _focalPoint = GameObject.Find("FocalPoint");
         
     }
 
@@ -29,6 +29,6 @@ public class PlayerController : MonoBehaviour
         float forwardInput = Input.GetAxis("Vertical");
         
         // Add force when the player uses his input. with the focal point as reference.
-        _playerRifRigidbody.AddForce(focalPoint.transform.forward * (speed * forwardInput));
+        _playerRifRigidbody.AddForce(_focalPoint.transform.forward * (_speed * forwardInput));
     }
 }
