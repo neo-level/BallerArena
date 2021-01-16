@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     // Add a speed variable that can be changed in the component to tweak.
     private float _speed = 10.0f;
-
+    private float _powerUpStrength = 15.0f;
+    
     // Get the Rigidbody class.
     private Rigidbody _playerRifRigidbody;
     private GameObject _focalPoint;
@@ -47,13 +48,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Checks if the player collides with the enemy and has to power up on it or not.
+    // Checks for collisions.
     // use this instead of trigger when you work with physics.
-    private void OnCollisionEnter(Collision enemyCollision)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (enemyCollision.gameObject.CompareTag("Enemy") && hasPowerUp)
+    // Checks if the player collides with the enemy and has to power up on it or not.
+        if (collision.gameObject.CompareTag("Enemy") && hasPowerUp)
         {
-            Debug.Log($"Player collided with {enemyCollision.gameObject} with the power up set to {hasPowerUp}.");
+            // fetch the enemies rigidbody.
+            Rigidbody enemyRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+            
+            // Create a vector that holds the direction the enemy has to fly towards on hit.
+            Vector3 awayFromPlayer = collision.gameObject.transform.position - transform.position;
+            
+            // Implement the force on the object, immediately. 
+            enemyRigidbody.AddForce(awayFromPlayer * _powerUpStrength, ForceMode.Impulse);
+            
+            
+            Debug.Log($"Player collided with {collision.gameObject} with the power up set to {hasPowerUp}.");
         }
     }
 }
