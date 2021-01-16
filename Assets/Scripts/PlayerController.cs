@@ -45,7 +45,21 @@ public class PlayerController : MonoBehaviour
         {
             hasPowerUp = true;
             Destroy(other.gameObject);
+
+            // Starts the thread outside our loop.
+            StartCoroutine(PowerUpCountdownRoutine());
+            
+            
         }
+    }
+    
+    // Enable a countdown timer outside update loop.
+   private IEnumerator PowerUpCountdownRoutine()
+    {
+        // enables our timer outside the update loop in a new thread.
+        yield return new WaitForSeconds(7);
+        hasPowerUp = false;
+        
     }
 
     // Checks for collisions.
