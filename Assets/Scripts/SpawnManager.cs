@@ -12,7 +12,8 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        SpawnEnemyOnRandomLocation();
+        // Instantiate a new enemy prefab, spawning the enemy at the given location.
+        Instantiate(enemyPrefab, position: GenerateRandomSpawnPosition(), rotation: enemyPrefab.transform.rotation);
     }
 
     // Update is called once per frame
@@ -20,15 +21,19 @@ public class SpawnManager : MonoBehaviour
     {
     }
 
-    private void SpawnEnemyOnRandomLocation()
+    // // Spawns an enemy on a random location.
+    // private void SpawnEnemyOnRandomLocation()
+    // {
+    // }
+
+    private Vector3 GenerateRandomSpawnPosition()
     {
         float spawnPositionX = Random.Range(-_spawnRange, _spawnRange);
         float spawnPositionZ = Random.Range(-_spawnRange, _spawnRange);
 
         // Create a vector with random generated numbers.
         Vector3 randomPosition = new Vector3(x: spawnPositionX, y: 0, z: spawnPositionZ);
-
-        // Instantiate a new enemy prefab, spawning the enemy at the given location.
-        Instantiate(enemyPrefab, position: randomPosition, rotation: enemyPrefab.transform.rotation);
+        
+        return randomPosition;
     }
 }
