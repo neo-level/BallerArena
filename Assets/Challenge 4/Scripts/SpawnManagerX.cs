@@ -55,6 +55,7 @@ public class SpawnManagerX : MonoBehaviour
         }
 
         waveCount++;
+        enemyPrefab.GetComponent<EnemyX>().speed++;
         ResetPlayerPosition(); // put player back at start
 
     }
