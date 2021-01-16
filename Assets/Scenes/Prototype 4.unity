@@ -592,25 +592,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 50
---- !u!1 &1615706866 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5308889235386511786, guid: 4f3c870f5f8a18a4fba6c78541e2b712,
-    type: 3}
-  m_PrefabInstance: {fileID: 5308889234853464920}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1615706867
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1615706866}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.67489624, y: 0.95568633, z: 0.20007594}
-  m_Center: {x: 0, y: -0.00000011920929, z: 0.000000007450581}
 --- !u!1 &1782488912
 GameObject:
   m_ObjectHideFlags: 0
